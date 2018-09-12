@@ -1,17 +1,8 @@
 // 297. Serialize and Deserialize Binary Tree
 //
 // Solution: BFS
-//
-// You may serialize the following tree:
-//
-//     1
-//    / \
-//   2   3
-//      / \
-//     4   5
-//
-// as "[1,2,3,null,null,4,5]"
 
+#include <sstream>
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -30,15 +21,14 @@ public:
       queue<TreeNode*> todos;
       todos.push(root);
 
-      while (! todos.empty()) {
+      while (!todos.empty()) {
         TreeNode* n = todos.front();
         todos.pop();
         if (n == NULL) {
           elements.push_back("null");
           continue;
-        } else {
-          elements.push_back(to_string(n->val));
         }
+        elements.push_back(to_string(n->val));
         todos.push(n->left);
         todos.push(n->right);
       }
@@ -58,17 +48,42 @@ public:
       for (auto s : elements) {
         res += s;
         res += " ";
-        cout << res << endl;
       }
       return res;
     }
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
+      TreeNode* root = NULL;
+      queue<TreeNode**> todos;
+      todos.push(&root);
+      string s_val;
+      istringstream iss(data);
+
+      while (iss >> s_val) {
+        TreeNode** n = todos.front();
+        todos.pop();
+        if (s_val != "null") {
+          int x = atoi(s_val.c_str());
+          *n = new TreeNode(x);
+          todos.push(&((*n)->left));
+          todos.push(&((*n)->right));
+        }
+      }
+      return root;
     }
 };
 
 
+// You may serialize the following tree:
+//
+//     1
+//    / \
+//   2   3
+//      / \
+//     4   5
+//
+// as "[1,2,3,null,null,4,5]"
 int main(int argc, char *argv[])
 {
   // define nodes
@@ -85,8 +100,14 @@ int main(int argc, char *argv[])
   nodes[3].right = &nodes[5];
 
   Codec cc;
-  cout << cc.serialize(root) << endl;
+  string s = cc.serialize(root);
+  cout << "serialization: " << s << endl;
 
+  root = cc.deserialize(s);
+  if (root != NULL) {
+    cout << "deserialization: " << cc.serialize(root) << endl;
+    delete root;
+  }
   return 0;
 }
 
