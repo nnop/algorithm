@@ -6,3 +6,5 @@ struct TreeNode {
     TreeNode(int x = -1) : val(x), left(NULL), right(NULL) {}
 };
 
+
+void show_tree(TreeNode* root);
