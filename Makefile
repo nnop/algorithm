@@ -1,4 +1,4 @@
-problem := test_tree
+problem := 297
 lib_name := algo
 
 # all dirs
@@ -28,7 +28,8 @@ LDFLAGS := -L$(lib_build_dir) -l$(lib_name)
 .PHONY: all clean run
 
 run: | $(bin_targets)
-	./$(bin_targets)
+	@echo '---- run ----'
+	@./$(bin_targets)
 
 # make dirs
 $(all_build_dirs):

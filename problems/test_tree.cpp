@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
   root->right = make_shared<TreeNode>(3);
   root->right->left = make_shared<TreeNode>(4);
   root->right->right = make_shared<TreeNode>(5);
+
   cout << serialize_tree(root) << endl;
   return 0;
 }
