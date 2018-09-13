@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stack>
 
-#include "tree.h"
+#include "common.h"
 
 using namespace std;
 
