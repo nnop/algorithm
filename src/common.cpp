@@ -1,10 +1,7 @@
-#include <utility>
-#include <iostream>
-#include <stack>
-
-#include "tree.h"
+#include "common.h"
 
 using namespace std;
+
 
 void show_tree(TreeNode* root) {
   stack<pair<TreeNode*, int>> todos;
@@ -28,3 +25,4 @@ void show_tree(TreeNode* root) {
     }
   }
 }
+
