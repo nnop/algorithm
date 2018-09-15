@@ -19,9 +19,11 @@ void show_tree(TreeNode* root);
 
 template <typename T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& arr) {
+  os << "[ ";
   for (auto i : arr) {
     os << i << " ";
   }
+  os << "]";
   return os;
 }
 
