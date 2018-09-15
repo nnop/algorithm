@@ -5,19 +5,23 @@ using namespace std;
 
 class Solution {
 public:
-  void add_set(vector<int> nums, int pos, vector<vector<int>>& res) {
-    if (pos == -1) {
-      res.push_back(nums);
+  void bt(const vector<int>& nums, int step, const vector<int>& cand,
+      vector<vector<int>>& res) {
+    if (step == nums.size()) {
+      res.push_back(cand);
       return;
     }
-    add_set(nums, pos - 1, res);
-    nums.erase(nums.cbegin() + pos);
-    add_set(nums, pos - 1, res);
+
+    vector<int> extend(cand);
+    bt(nums, step + 1, extend, res);
+
+    extend.push_back(nums[step]);
+    bt(nums, step + 1, extend, res);
   }
 
-  vector<vector<int>> subsets(vector<int>& nums) {
+  vector<vector<int>> subsets(const vector<int>& nums) {
     vector<vector<int>> res;
-    add_set(nums, nums.size() - 1, res);
+    bt(nums, 0, {}, res);
     return std::move(res);
   }
 };
