@@ -24,3 +24,20 @@ struct TreeNode {
 
 void show_tree(TreeNode* root);
 
+template <typename T>
+std::ostream& operator << (std::ostream& os, const std::vector<T>& arr) {
+  os << "[ ";
+  for (auto i : arr) {
+    os << i << " ";
+  }
+  os << "]";
+  return os;
+}
+
+template <typename T>
+std::ostream& operator << (std::ostream& os, const std::vector<std::vector<T>>& arr_set) {
+  for (const auto& arr : arr_set) {
+    os << arr << std::endl;
+  }
+  return os;
+}
