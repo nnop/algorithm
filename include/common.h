@@ -8,9 +8,10 @@
 #include <memory>
 #include <unordered_map>
 #include <unordered_set>
-#include <algorithm>
 #include <stack>
 #include <queue>
+#include <algorithm>
+#include <numeric>
 
 #define SHOW(var) std::cout << #var": " << var << std::endl
 
