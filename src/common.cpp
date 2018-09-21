@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void show_tree(TreeNode* root) {
+void show_tree(TreeNode *root) {
   stack<pair<TreeNode*, int>> todos;
   todos.push({root, 0});
   while (!todos.empty()) {
@@ -26,3 +26,9 @@ void show_tree(TreeNode* root) {
   }
 }
 
+void show_list(ListNode *root) {
+  cout << "[ ";
+  for (ListNode *node = root; node != NULL; node = node->next)
+    cout << node->val << " ";
+  cout << "]" << endl;
+}

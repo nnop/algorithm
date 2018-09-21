@@ -23,8 +23,15 @@ struct TreeNode {
     TreeNode(int x = -1) : val(x), left(NULL), right(NULL) {}
 };
 
+struct ListNode {
+  int val;
+  ListNode *next;
+  ListNode(int x = -1) : val(x), next(NULL) {}
+};
 
-void show_tree(TreeNode* root);
+void show_tree(TreeNode *root);
+
+void show_list(ListNode *root);
 
 template <typename T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& arr) {
