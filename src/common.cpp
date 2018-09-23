@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 void show_tree(TreeNode *root) {
   stack<pair<TreeNode*, int>> todos;
   todos.push({root, 0});
@@ -32,3 +31,8 @@ void show_list(ListNode *root) {
     cout << node->val << " ";
   cout << "]" << endl;
 }
+
+bool operator== (const Index& lhs, const Index& rhs) {
+  return lhs.value == rhs.value && lhs.index == rhs.index;
+}
+
