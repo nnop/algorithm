@@ -14,6 +14,7 @@
 #include <queue>
 #include <algorithm>
 #include <numeric>
+#include <functional>
 #include <glog/logging.h>
 
 #define SHOW(var) std::cout << #var": " << var << std::endl
