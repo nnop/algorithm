@@ -10,11 +10,8 @@ public:
    * @return: nothing
    */
   int partition(vector<int>& nums, int left, int right) {
-    int idx = (left + right) / 2;
-    int pivot = nums[idx];
-    // move pivot to the end
-    swap(nums[idx], nums[right]);
-    int l = left, r = right - 1;
+    int pivot = nums[(left + right) / 2];
+    int l = left, r = right;
     while (l <= r) {
       while (l <= r && nums[l] < pivot) {
         ++l;
@@ -28,8 +25,6 @@ public:
         ++l, --r;
       }
     }
-    if (l != right)
-      swap(nums[l], nums[right]);
     return l;
   }
 
@@ -44,6 +39,31 @@ public:
 
   void sortIntegers2(vector<int> &A) {
     quicksort(A, 0, A.size() - 1);
+  }
+};
+
+class Solution2 {
+public: 
+  void qsort(vector<int>& nums, int left, int right) {
+    int l = left, r = right;
+    int val = nums[l];
+    while (l < r) {
+      while (r > l && nums[r] >= val)
+        --r;
+      nums[l] = nums[r];
+      while (l < r && nums[l] <= val)
+        ++l;
+      nums[r] = nums[l];
+    }
+    nums[l] = val;
+    if (l - 1 > left)
+      qsort(nums, left, l - 1);
+    if (l + 1 < right)
+      qsort(nums, l + 1, right);
+  }
+
+  void sortIntegers2(vector<int>& nums) {
+    qsort(nums, 0, nums.size() - 1);
   }
 };
 
