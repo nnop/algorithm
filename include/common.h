@@ -17,6 +17,8 @@
 #include <functional>
 #include <glog/logging.h>
 
+#include "catch2/catch.hpp"
+
 #define SHOW(var) std::cout << #var": " << var << std::endl
 
 #define FROM(i, m, n) for (int(i) = (m); (i) < (n); ++(i))
