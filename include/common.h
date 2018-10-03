@@ -14,6 +14,7 @@
 #include <queue>
 #include <algorithm>
 #include <numeric>
+#include <limits>
 #include <functional>
 #include <glog/logging.h>
 
