@@ -10,6 +10,7 @@ class Solution {
 
       int l = 0, r = nums.size() - 1;
       // loop invariant: range [l, r] contains t
+      // loop condition: [l, r] is not empty, that is l <= r
       while (l <= r) {
         int m = l + ((r - l) >> 1);
         if (nums[m] == target)
