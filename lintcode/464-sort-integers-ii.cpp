@@ -1,7 +1,6 @@
 #include "common.h"
 
 using namespace std;
-using Catch::Matchers::Equals;
 
 class Solution {
 public:

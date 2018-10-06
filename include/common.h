@@ -20,12 +20,17 @@
 
 #include "catch2/catch.hpp"
 
+using Catch::Matchers::Equals;
+using Catch::Matchers::Contains;
+using Catch::Matchers::VectorContains;
+
 #define SHOW(var) std::cout << #var": " << var << std::endl
 
 #define FROM(i, m, n) for (int(i) = (m); (i) < (n); ++(i))
 #define MORF(i, m, n) for (int(i) = (n) - 1; (i) >= (m); --(i))
 #define FOR(i, n) for (int(i) = 0; (i) < (n); ++(i))
 #define ROF(i, n) for (int(i) = (n) - 1; (i) >= 0; --(i))
+#define FOREACH(i, n) for (auto i = (n).begin(); i != (n).end(); ++i)
 
 struct TreeNode {
   int val;
