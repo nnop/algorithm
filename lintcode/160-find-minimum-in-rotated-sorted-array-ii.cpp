@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class Solution {
+class Solution1 {
   public:
     int range_min(vector<int> &nums, int l, int r) {
       if (l + 1 >= r)
@@ -29,8 +29,32 @@ class Solution {
     }
 };
 
+class Solution2 {
+  public:
+    int findMin(vector<int> &nums) {
+      if (nums.size() == 1)
+        return nums[0];
+
+      int l = 0, r = nums.size() - 1;
+
+      while (l + 1 < r) {
+        int m = l + ((r - l) >> 1);
+
+        if (nums[m] == nums[r]) {
+          r--;
+        } else if (nums[m] < nums[r]) {
+          r = m;
+        } else {
+          l = m + 1;
+        }
+      }
+
+      return min(nums[l], nums[r]);
+    }
+};
+
 TEST_CASE("160. Find Minimum in Rotated Sorted Array II") {
-  Solution sol;
+  Solution1 sol;
 
   SECTION("basic") {
     vector<int> nums = {4, 4, 5, 6, 7, 0, 1, 2};
