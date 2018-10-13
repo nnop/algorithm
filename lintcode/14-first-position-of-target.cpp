@@ -8,18 +8,18 @@ class Solution {
       if (nums.size() == 0)
         return -1;
 
+      // invariant: [0, l) < t && (r, n - 1] >= t
+      // init cond: l = 0, r = n - 1, so both sets are empty.
+      // post cond: l == r
       int l = 0, r = nums.size() - 1;
-      // loop invariant: A[l] <= t && A[r] >= t
       while (l < r) {
-        int m = l + ((r - l) >> 1);
-        // move towards left
+        int m = l + (r - l) / 2;
         if (nums[m] >= target)
           r = m;
         else
           l = m + 1;
       }
-      // post condition: l == r
-      return (nums[l] == target) ? l : -1;
+      return nums[l] == target ? l : -1;
     }
 };
 
@@ -33,10 +33,12 @@ TEST_CASE("14. First Position of Target") {
     CHECK(sol.binarySearch(nums, target) == ans);
   }
 
-  SECTION("1") {
+  SECTION("case 1") {
     vector<int> nums = {1, 2, 3};
-    int target = 2;
-    int ans = 1;
-    CHECK(sol.binarySearch(nums, target) == ans);
+    CHECK(sol.binarySearch(nums, 0) == -1);
+    CHECK(sol.binarySearch(nums, 1) == 0);
+    CHECK(sol.binarySearch(nums, 2) == 1);
+    CHECK(sol.binarySearch(nums, 3) == 2);
+    CHECK(sol.binarySearch(nums, 4) == -1);
   }
 }

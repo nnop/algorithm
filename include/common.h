@@ -52,8 +52,10 @@ struct Index {
 };
 
 // make pair<T, R> hashable
+namespace std {
+
 template<typename T, typename R>
-struct std::hash<std::pair<T, R>> {
+struct hash<std::pair<T, R>> {
   size_t operator() (const std::pair<T, R>& s) const {
     size_t h1 = std::hash<T>{}(s.first);
     size_t h2 = std::hash<R>{}(s.second);
@@ -61,14 +63,20 @@ struct std::hash<std::pair<T, R>> {
   }
 };
 
+}
+
 // make Index hashable
-template<> struct std::hash<Index> {
+namespace std {
+
+template<> struct hash<Index> {
   size_t operator() (const Index& idx) const {
     size_t h1 = std::hash<int>{}(idx.value);
     size_t h2 = std::hash<int>{}(idx.index);
     return h1 ^ (h2 << 1);
   }
 };
+
+}
 
 bool operator== (const Index& lhs, const Index& rhs);
 
