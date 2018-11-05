@@ -3,6 +3,7 @@
 #include <cassert>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -138,3 +139,5 @@ void show_node_pool(const std::unordered_map<Index, T>& nodes) {
          << "), node: " << elem.second.val << std::endl;
   }
 }
+
+std::vector<int> stringToIntegerVector(std::string input);
