@@ -9,7 +9,7 @@ class Solution {
         return -1;
 
       int l = 0, r = nums.size() - 1;
-      // loop invariant: A[l] <= t && A[r] >= t
+      // loop invariant: A[l] <= t && A[r] > t
       while (l < r) {
         int m = l + ((r - l + 1) >> 1);
         // move towards right
@@ -36,6 +36,13 @@ TEST_CASE("458. Last Position of Target") {
   SECTION("2") {
     vector<int> nums = {1, 2, 3};
     int target = 2;
+    int ans = 1;
+    CHECK(sol.lastPosition(nums, target) == ans);
+  }
+
+  SECTION("3") {
+    vector<int> nums = {5, 5};
+    int target = 5;
     int ans = 1;
     CHECK(sol.lastPosition(nums, target) == ans);
   }
