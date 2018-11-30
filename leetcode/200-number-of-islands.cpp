@@ -26,7 +26,7 @@ class Solution {
       FOR(i, M) {
         FOR(j, N) {
           if (grid[i][j] == '1') {
-            dfs(grid, i, j);
+            bfs(grid, i, j);
             ++cnt;
           }
         }
@@ -36,16 +36,34 @@ class Solution {
 
   private:
     int M, N;
+    const vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     void dfs(vector<vector<char>> &grid, int i, int j) {
       if (i < 0 || j < 0 || i >= M || j >= N || grid[i][j] != '1')
         return;
 
       grid[i][j] = '0';
-      dfs(grid, i - 1, j);
-      dfs(grid, i + 1, j);
-      dfs(grid, i, j - 1);
-      dfs(grid, i, j + 1);
+      for (auto dir : dirs) {
+        dfs(grid, i + dir[0], j + dir[1]);
+      }
+    }
+
+    void bfs(vector<vector<char>> &grid, int i, int j) {
+      queue<vector<int>> todo_nodes;
+      todo_nodes.push({i, j});
+      while (!todo_nodes.empty()) {
+        vector<int> node = todo_nodes.front();
+        todo_nodes.pop();
+        i = node[0], j = node[1];
+        grid[i][j] = '0';
+
+        for (auto dir : dirs) {
+          int ii = i + dir[0], jj = j + dir[1];
+          if (ii < 0 || jj < 0 || ii >= M || jj >= N || grid[ii][jj] != '1')
+            continue;
+          todo_nodes.push({ii, jj});
+        }
+      }
     }
 };
 
