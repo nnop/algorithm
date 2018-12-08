@@ -36,46 +36,73 @@ bool operator== (const Index& lhs, const Index& rhs) {
   return lhs.value == rhs.value && lhs.index == rhs.index;
 }
 
+// leetcode snippets
+
 void trimLeftTrailingSpaces(string &input) {
-    input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
+  input.erase(input.begin(), find_if(input.begin(), input.end(), [](int ch) {
         return !isspace(ch);
-    }));
+        }));
 }
 
 void trimRightTrailingSpaces(string &input) {
-    input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
+  input.erase(find_if(input.rbegin(), input.rend(), [](int ch) {
         return !isspace(ch);
-    }).base(), input.end());
+        }).base(), input.end());
 }
 
 vector<int> stringToIntegerVector(string input) {
-    vector<int> arr;
-    trimLeftTrailingSpaces(input);
-    trimRightTrailingSpaces(input);
-    input = input.substr(1, input.length() - 2);
-    stringstream ss;
-    ss.str(input);
-    string item;
-    char delim = ',';
-    while (getline(ss, item, delim)) {
-        arr.push_back(stoi(item));
-    }
-    return arr;
+  vector<int> arr;
+  trimLeftTrailingSpaces(input);
+  trimRightTrailingSpaces(input);
+  input = input.substr(1, input.length() - 2);
+  stringstream ss;
+  ss.str(input);
+  string item;
+  char delim = ',';
+  while (getline(ss, item, delim)) {
+    arr.push_back(stoi(item));
+  }
+  return arr;
 }
 
 string integerVectorToString(vector<int>& arr, int length = -1) {
-    if (length == -1) {
-        length = arr.size();
-    }
+  if (length == -1) {
+    length = arr.size();
+  }
 
-    if (length == 0) {
-        return "[]";
-    }
+  if (length == 0) {
+    return "[]";
+  }
 
-    string result;
-    for(int index = 0; index < length; index++) {
-        int number = arr[index];
-        result += to_string(number) + ", ";
-    }
-    return "[" + result.substr(0, result.length() - 2) + "]";
+  string result;
+  for(int index = 0; index < length; index++) {
+    int number = arr[index];
+    result += to_string(number) + ", ";
+  }
+  return "[" + result.substr(0, result.length() - 2) + "]";
+}
+
+vector<vector<int>> stringToIntegerMatrix(string input) {
+  vector<vector<int>> M;
+  int i = input.find('['), j = input.rfind(']');
+  if (i == string::npos || j == string::npos)
+    return M;
+
+  input = input.substr(i + 1, j - i - 1);
+  while (true) {
+    i = input.find('['), j = input.find(']');
+    if (i == string::npos)
+      break;
+    string subs = input.substr(i + 1, j - i - 1);
+    stringstream ss(subs);
+    string item;
+    vector<int> arr;
+    while (getline(ss, item, ','))
+      arr.push_back(stoi(item));
+    M.push_back(arr);
+
+    input = input.substr(j + 1);
+  }
+
+  return M;
 }

@@ -33,6 +33,8 @@ using Catch::Matchers::VectorContains;
 #define ROF(i, n) for (int(i) = (n) - 1; (i) >= 0; --(i))
 #define FOREACH(i, n) for (auto i = (n).begin(); i != (n).end(); ++i)
 
+const int INF = 2147483647;
+
 struct TreeNode {
   int val;
   TreeNode *left;
@@ -92,7 +94,10 @@ template <typename T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& arr) {
   os << "[ ";
   for (auto i : arr) {
-    os << i << " ";
+    if (i == INF)
+      os << "INF\t";
+    else
+      os << i << '\t';
   }
   os << "]";
   return os;
@@ -140,4 +145,6 @@ void show_node_pool(const std::unordered_map<Index, T>& nodes) {
   }
 }
 
+// leetcode snippets
 std::vector<int> stringToIntegerVector(std::string input);
+std::vector<std::vector<int>> stringToIntegerMatrix(std::string input);
